@@ -3,6 +3,8 @@ const createError = require("http-errors");
 function notfoundHandler(req,res,next){
     next(createError(404,'Your requested page not found !'))
 }
+
+
 function errorHandler(err,req,res,next){
  res.locals.error=
  process.env.NODE_ENV==='development'?err:{msg:err.message};
