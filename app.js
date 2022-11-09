@@ -3,10 +3,16 @@ const dotenv = require('dotenv');
 const { default: mongoose } = require('mongoose');
 const cookieParser = require('cookie-parser');
 const path=require('path');
+
+
 const { notfoundHandler, errorHandler } = require('./middlewares/Error/errorHandler');
+
+
 const loginRoute=require('./router/loginRoute');
 const userRoute=require('./router/userRoute');
 const inboxRoute=require('./router/inboxRoute');
+
+
 const app = express();
 dotenv.config()
 
@@ -39,6 +45,9 @@ mongoose.connect(process.env.DATABASE_URL, {
     app.use('/',loginRoute);
     app.use('/users',userRoute);
     app.use('/inbox',inboxRoute);
+
+
+    
     //not fount 404
     app.use(notfoundHandler);
 
@@ -47,4 +56,4 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 
 
-app.listen(process.env.PORT, () => console.log(`app running at port 50000`))
+app.listen(process.env.PORT, () => console.log(`app running at port ${process.env.PORT}`))

@@ -5,7 +5,22 @@ function avaterUpload(req,res,next){
         1000000,
         "Only jpeg , jpg, and png allowed!"
 
-    )
+    );
+
+     // call the middleware function
+  upload.any()(req, res, (err) => {
+    if (err) {
+      res.status(500).json({
+        errors: {
+          avatar: {
+            msg: err.message,
+          },
+        },
+      });
+    } else {
+      next();
+    }
+  });
 }
 
 module.exports=avaterUpload;
